@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "988101717063",
+    "firebase_url": "https://ayoubgame-a113d.firebaseio.com",
+    "project_id": "ayoubgame-a113d",
+    "storage_bucket": "ayoubgame-a113d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988101717063:android:7e5bcd2f0841fc8ebcd562",
+        "android_client_info": {
+          "package_name": "com.samozstudio.ayoubgame.firstgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988101717063-maf5qu7d3ed879s7b88f3f3kcmto5pol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samozstudio.ayoubgame.firstgame",
+            "certificate_hash": "dcd7d2f319d3f3e1a2b773a45be28ce02b2abb42"
+          }
+        },
+        {
+          "client_id": "988101717063-hsmgj6g3mm97h693aec25642b827i23u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvXnyxrc4l5xIlAUQerj-JXAhIRFe89so"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988101717063-hsmgj6g3mm97h693aec25642b827i23u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
