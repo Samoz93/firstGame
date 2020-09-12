@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:firstgame/Base/Enums.dart';
 
 import 'package:flutter/material.dart';
@@ -9,8 +8,10 @@ import 'package:get/get.dart';
 class MyGesture extends StatefulWidget {
   final Function(double, GDirections) onUpdate;
   final Function(GDirections) onDone;
+  final double threshould;
   final Widget child;
-  const MyGesture({Key key, this.onUpdate, this.onDone, this.child})
+  const MyGesture(
+      {Key key, this.onUpdate, this.onDone, this.child, this.threshould = 0.4})
       : super(key: key);
 
   @override
@@ -37,8 +38,8 @@ class _MyGestureState extends State<MyGesture> {
           if (widget.onUpdate != null) widget.onUpdate(opacity, gDir);
         },
         onPanEnd: (d) {
-          log("emd");
-          if (widget.onDone != null) widget.onDone(gDir);
+          if (opacity > widget.threshould && widget.onDone != null)
+            widget.onDone(gDir);
         },
         child: widget.child,
       ),

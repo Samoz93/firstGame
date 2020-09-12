@@ -33,7 +33,7 @@ class _OkWidgetState extends State<OkWidget> {
         child: LayoutBuilder(
           builder: (context, constraints) => Icon(
             widget.icon,
-            size: constraints.biggest.width,
+            size: constraints.biggest.width * 0.8,
             color: Colors.greenAccent,
           ),
         ),

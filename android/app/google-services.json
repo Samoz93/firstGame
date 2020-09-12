@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "988101717063-3qfl9vvniv3mn4knsj057gt83bp0k733.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samozstudio.ayoubgame.firstgame",
+            "certificate_hash": "b575d59dcd6493e76b81b675c1dfaef0fdcb79b6"
+          }
+        },
+        {
           "client_id": "988101717063-maf5qu7d3ed879s7b88f3f3kcmto5pol.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

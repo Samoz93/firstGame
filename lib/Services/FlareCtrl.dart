@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:firstgame/Base/Consts.dart';
+import 'package:firstgame/Base/Enums.dart';
 import 'package:flare_flutter/flare.dart';
 import 'package:flare_dart/math/mat2d.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -43,6 +45,7 @@ class MyFlareController extends FlareController {
   }
   int _extraDuratiom = 1;
   set anim(String name) {
+    if (name == gDirToString(GDirections.None)) return;
     ActorAnimation animation = _artboard.getAnimation(name);
     _currentAnimation = FlareAnimationLayer()..animation = animation;
   }

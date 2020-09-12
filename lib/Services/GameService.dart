@@ -2,61 +2,80 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firstgame/Base/Consts.dart';
 import 'package:firstgame/Base/Enums.dart';
+import 'package:firstgame/models/GameModel.dart';
 
 class GameService {
-  final String gameUid;
-  final String player2Uid;
+  GameModel gameModel;
 
   final _ser = FirebaseAuth.instance;
   final _db = FirebaseDatabase.instance;
-  User get _me => _ser.currentUser;
+  User get me => _ser.currentUser;
+  GameService({this.gameModel});
 
-  GameService({this.gameUid, this.player2Uid});
+  Future<GameModel> get gameData async {
+    final x = (await _db
+            .reference()
+            .child(DBConsts.Games)
+            .child(gameModel.uid)
+            .once())
+        .value;
+    final map = convertToMap(x);
+    return GameModel.fromJson(map);
+  }
 
-  saveDirection(int phase, GDirections dir) async {
-    if (_me == null) await _ser.signInAnonymously();
+  saveDirection(String phase, GDirections dir) async {
+    if (me == null) await _ser.signInAnonymously();
     _db
         .reference()
         .child(DBConsts.Games)
-        .child(gameUid)
+        .child(gameModel.uid)
         .child(DBConsts.Phases)
-        .child(_me.uid)
-        .update({phase.toString(): dir.index});
+        .child(me.uid)
+        .update({phase: dir.index});
 
-    //TODO TEST
+    // //TODO TEST
 
-    _db
-        .reference()
-        .child(DBConsts.Games)
-        .child(gameUid)
-        .child(DBConsts.Phases)
-        .child(player2Uid)
-        .update({phase.toString(): dir.index});
+    // _db
+    //     .reference()
+    //     .child(DBConsts.Games)
+    //     .child(gameModel.uid)
+    //     .child(DBConsts.Phases)
+    //     .child(p2Uid)
+    //     .update({phase: dir.index});
   }
 
   Stream get myData {
     return _db
         .reference()
         .child(DBConsts.Games)
-        .child(gameUid)
+        .child(gameModel.uid)
         .child(DBConsts.Phases)
-        .child(_me.uid)
+        .child(me.uid)
         .onValue
         .map((event) => event.snapshot.value);
   }
 
-  Stream get player2Data {
-    return _db
-        .reference()
-        .child(DBConsts.Games)
-        .child(gameUid)
-        .child(DBConsts.Phases)
-        .child(player2Uid)
-        .onChildAdded
-        .map((event) => event.snapshot.value);
+  String get p2Uid {
+    return gameModel.amITheOwner(me.uid) ? gameModel.player2 : gameModel.owner;
+  }
+
+  Future get player2DataFuture async {
+    return (await _db
+            .reference()
+            .child(DBConsts.Games)
+            .child(gameModel.uid)
+            .child(DBConsts.Phases)
+            .child(p2Uid)
+            .once())
+        .value;
   }
 
   Future<void> clearRoom() async {
-    await _db.reference().child(DBConsts.Games).child(gameUid).remove();
+    await _db
+        .reference()
+        .child(DBConsts.Games)
+        .child(gameModel.uid)
+        .child(DBConsts.Phases)
+        .remove();
   }
 }

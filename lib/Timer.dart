@@ -4,7 +4,14 @@ import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 class TimerWidget extends StatefulWidget {
   final int seconds;
   final bool showTimer;
-  const TimerWidget({Key key, this.seconds, this.showTimer = true})
+  final int starSize;
+  final int endSize;
+  const TimerWidget(
+      {Key key,
+      this.seconds,
+      this.showTimer = true,
+      this.endSize = 200,
+      this.starSize = 15})
       : super(key: key);
 
   @override
@@ -50,18 +57,20 @@ class _TimerWidgetState extends State<TimerWidget>
       builder: (context, child) => Center(
         child: Center(
           child: Container(
-            width: widget.showTimer ? 200 : 0,
-            height: widget.showTimer ? 200 : 0,
+            width: widget.showTimer ? sequenceAnimation['size'].value : 0,
+            height: widget.showTimer ? sequenceAnimation['size'].value : 0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: widget.seconds > 2
-                  ? Colors.green
-                  : sequenceAnimation['color'].value,
             ),
             child: Center(
               child: Text(
                 widget.seconds.toString(),
-                style: TextStyle(fontSize: sequenceAnimation['size'].value),
+                style: TextStyle(
+                  fontSize: sequenceAnimation['size'].value,
+                  color: widget.seconds > 2
+                      ? Colors.green
+                      : sequenceAnimation['color'].value,
+                ),
               ),
             ),
           ),
